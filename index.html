@@ -2110,7 +2110,7 @@ function setupAudioContext() {
 
 // Create floating elements
 function createFloatingElements() {
-    const elements = ['🎵', '🎶', '🎧', '🎼', '🎤', '🎷', '🎸', '🎹', '🎺', '🎻', '🥁', '📻'];
+    const elements = ['🎵', '🎶', '🎧', '🎼', '🎤', '🎷', '🎸', '🎹'];
     const colors = ['#6c5ce7', '#00cec9', '#fd79a8', '#fdcb6e', '#00b894', '#e17055'];
     
     function createElement() {
@@ -2120,8 +2120,8 @@ function createFloatingElements() {
         
         const size = Math.random() * 2 + 1;
         const posX = Math.random() * 100;
-        const duration = Math.random() * 15 + 10;
-        const delay = Math.random() * 5;
+        const duration = Math.random() * 5 + 10;
+        const delay = Math.random() * 10;
         const color = colors[Math.floor(Math.random() * colors.length)];
         const animationType = Math.floor(Math.random() * 3) + 1;
         
@@ -2141,7 +2141,7 @@ function createFloatingElements() {
         }, duration * 1000);
     }
     
-    setInterval(createElement, 800);
+    setInterval(createElement, 100);
     
     for (let i = 0; i < 15; i++) {
         setTimeout(createElement, i * 300);
