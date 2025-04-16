@@ -2091,17 +2091,93 @@
             window.addEventListener('resize', handleResize);
         }
     
+        // Setup audio context for visualizer
+function setupAudioContext() {
+    try {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioContext.createAnalyser();
+        analyser.fftSize = 256;
         
-        // Create audio visualizer
-        function createVisualizer() {
-            for (let i = 0; i < 30; i++) {
-                const bar = document.createElement('div');
-                bar.classList.add('visualizer-bar');
-                bar.style.height = `${Math.random() * 80 + 20}%`;
-                bar.style.animationDelay = `-${Math.random() * 1.5}s`;
-                audioVisualizer.appendChild(bar);
-            }
+        const source = audioContext.createMediaElementSource(audioPlayer);
+        source.connect(analyser);
+        analyser.connect(audioContext.destination);
+        
+        dataArray = new Uint8Array(analyser.frequencyBinCount);
+    } catch (e) {
+        console.error('Audio Context error:', e);
+    }
+}
+
+// Create floating elements
+function createFloatingElements() {
+    const elements = ['🎵', '🎶', '🎧', '🎼', '🎤', '🎷', '🎸', '🎹', '🎺', '🎻', '🥁', '📻'];
+    const colors = ['#6c5ce7', '#00cec9', '#fd79a8', '#fdcb6e', '#00b894', '#e17055'];
+    
+    function createElement() {
+        const element = document.createElement('div');
+        element.className = 'floating-element';
+        element.textContent = elements[Math.floor(Math.random() * elements.length)];
+        
+        const size = Math.random() * 2 + 1;
+        const posX = Math.random() * 100;
+        const duration = Math.random() * 15 + 10;
+        const delay = Math.random() * 5;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const animationType = Math.floor(Math.random() * 3) + 1;
+        
+        element.style.fontSize = `${size}rem`;
+        element.style.left = `${posX}%`;
+        element.style.bottom = '0';
+        element.style.color = color;
+        element.style.animationDuration = `${duration}s`;
+        element.style.animationDelay = `${delay}s`;
+        element.style.animationName = `floatElement${animationType}`;
+        element.style.filter = `drop-shadow(0 0 5px ${color})`;
+        
+        floatingElements.appendChild(element);
+        
+        setTimeout(() => {
+            element.remove();
+        }, duration * 1000);
+    }
+    
+    setInterval(createElement, 800);
+    
+    for (let i = 0; i < 15; i++) {
+        setTimeout(createElement, i * 300);
+    }
+}
+
+// Create audio visualizer with actual audio analysis
+function createVisualizer() {
+    audioVisualizer.innerHTML = '';
+    visualizerBars = [];
+    
+    for (let i = 0; i < 30; i++) {
+        const bar = document.createElement('div');
+        bar.classList.add('visualizer-bar');
+        bar.style.height = '20%';
+        audioVisualizer.appendChild(bar);
+        visualizerBars.push(bar);
+    }
+    
+    function updateVisualizer() {
+        if (!analyser || !isPlaying) return;
+        
+        analyser.getByteFrequencyData(dataArray);
+        
+        for (let i = 0; i < visualizerBars.length; i++) {
+            const value = dataArray[i * 2] || 0;
+            const height = `${Math.max(20, value / 2)}%`;
+            visualizerBars[i].style.height = height;
+            visualizerBars[i].style.backgroundColor = `hsl(${200 + (value / 2)}, 100%, 50%)`;
         }
+        
+        requestAnimationFrame(updateVisualizer);
+    }
+    
+    updateVisualizer();
+}
         
         // Handle orientation changes
         function handleOrientationChange() {
