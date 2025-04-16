@@ -2518,8 +2518,8 @@ function createVisualizer() {
         }
         
         // YouTube IFrame API callback
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
+       window.onYouTubeIframeAPIReady = function() {
+    player = new YT.Player('youtube-player', {
                 height: '0',
                 width: '0',
                 events: {
