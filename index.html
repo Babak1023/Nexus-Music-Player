@@ -1993,7 +1993,7 @@
 
     <script>
         // API Configuration
-        const YT_API_KEY = 'AIzaSyANiy0iPK_rR4KEJdj2dkd6oOXa_2Mrl5U';
+        const YT_API_KEY = 'AIzaSyAqOFrbr09q_3CvEVGZi70YuZHz1mytUfw';
         const LYRICS_API_URL = 'https://api.lyrics.ovh/v1/';
         
         // DOM Elements
@@ -2108,45 +2108,6 @@ function setupAudioContext() {
     }
 }
 
-// Create floating elements
-function createFloatingElements() {
-    const elements = ['🎵', '🎶', '🎧', '🎼', '🎤', '🎷', '🎸', '🎹'];
-    const colors = ['#6c5ce7', '#00cec9', '#fd79a8', '#fdcb6e', '#00b894', '#e17055'];
-    
-    function createElement() {
-        const element = document.createElement('div');
-        element.className = 'floating-element';
-        element.textContent = elements[Math.floor(Math.random() * elements.length)];
-        
-        const size = Math.random() * 2 + 1;
-        const posX = Math.random() * 100;
-        const duration = Math.random() * 5 + 10;
-        const delay = Math.random() * 10;
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        const animationType = Math.floor(Math.random() * 3) + 1;
-        
-        element.style.fontSize = `${size}rem`;
-        element.style.left = `${posX}%`;
-        element.style.bottom = '0';
-        element.style.color = color;
-        element.style.animationDuration = `${duration}s`;
-        element.style.animationDelay = `${delay}s`;
-        element.style.animationName = `floatElement${animationType}`;
-        element.style.filter = `drop-shadow(0 0 5px ${color})`;
-        
-        floatingElements.appendChild(element);
-        
-        setTimeout(() => {
-            element.remove();
-        }, duration * 1000);
-    }
-    
-    setInterval(createElement, 500);
-    
-    for (let i = 0; i < 15; i++) {
-        setTimeout(createElement, i * 400);
-    }
-}
 
 // Create audio visualizer with actual audio analysis
 function createVisualizer() {
