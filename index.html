@@ -1982,12 +1982,12 @@
     
     <div class="nexus-menu-overlay" id="nexusMenuOverlay">
         <a href="about.html" class="nexus-menu-item" id="about-btn">
-            <span>ℹ️</span>
+            <span>ⅰ</span>
             <span>About</span>
         </a>
         <a href="#" class="nexus-menu-item" id="stats-btn">
-            <span>📊</span>
-            <span>Stats</span>
+            <span>⊠</span>
+            <span>Cooming soon</span>
         </a>
     </div>
 
@@ -2141,10 +2141,10 @@ function createFloatingElements() {
         }, duration * 1000);
     }
     
-    setInterval(createElement, 50);
+    setInterval(createElement, 500);
     
     for (let i = 0; i < 15; i++) {
-        setTimeout(createElement, i * 40);
+        setTimeout(createElement, i * 400);
     }
 }
 
@@ -3039,13 +3039,6 @@ function createVisualizer() {
                     nexusMenuBtn.classList.remove('animate__animated', 'animate__pulse');
                 }, 1000);
             }
-        }
-
-        // Show about info
-        function showAbout(e) {
-            e.preventDefault();
-            toggleMenu();
-            showNotification('Nexus Music Player\nPremium Music Experience\nVersion 2.0');
         }
 
         // Show stats
