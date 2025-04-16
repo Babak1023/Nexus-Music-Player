@@ -1831,27 +1831,27 @@
     </style>
 </head>
 <body>
-    <!-- Loading Screen - Vinyl Turntable -->
+<!-- Loading Screen - Vinyl Turntable -->
     <div class="loading-screen" id="loading-screen">
         <div class="turntable">
             <div class="turntable-base">
                 <div class="turntable-surface"></div>
                 <div class="vinyl">
-                    <div class="vinyl-label">NEXUS</div>
+                    <div class="vinyl-label">NEXῠS</div>
                 </div>
                 <div class="tonearm">
                     <div class="needle"></div>
                 </div>
                 <div class="turntable-controls">
-                    <button class="turntable-btn">⏾</button>
-                    <button class="turntable-btn">⏵</button>
-                    <button class="turntable-btn">⏹</button>
+                    <button class="turntable-btn">●</button>
+                    <button class="turntable-btn">▶</button>
+                    <button class="turntable-btn">■</button>
                 </div>
             </div>
         </div>
         <div class="loading-text">Nexus Music Player</div>
     </div>
-
+    
     <!-- Floating Elements Background -->
     <div class="floating-elements" id="floatingElements"></div>
     
@@ -2141,10 +2141,10 @@ function createFloatingElements() {
         }, duration * 1000);
     }
     
-    setInterval(createElement, 100);
+    setInterval(createElement, 50);
     
     for (let i = 0; i < 15; i++) {
-        setTimeout(createElement, i * 300);
+        setTimeout(createElement, i * 40);
     }
 }
 
@@ -2253,7 +2253,7 @@ function createVisualizer() {
                 }
                 
                 // Limit to 200 songs
-                songs = songs.slice(0, 200);
+                songs = songs.slice(0, 400);
                 
                 applyFilter();
                 
